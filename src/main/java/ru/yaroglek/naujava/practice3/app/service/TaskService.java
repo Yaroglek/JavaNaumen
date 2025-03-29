@@ -1,15 +1,28 @@
 package ru.yaroglek.naujava.practice3.app.service;
 
-import ru.yaroglek.naujava.practice3.domain.Task;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import ru.yaroglek.naujava.practice3.app.repository.NoteRepository;
+import ru.yaroglek.naujava.practice3.app.repository.TaskRepository;
+import ru.yaroglek.naujava.practice3.domain.Note;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
-public interface TaskService
-{
-    void createTask(Long id, String title, String description, LocalDateTime dueDateTime);
-    Task findById(Long id);
-    void deleteById(Long id);
-    void updateStatus(Long id, Task.TaskStatus newStatus);
-    void updateDueDateTime(Long id, LocalDateTime dueDateTime);
+@Service
+@RequiredArgsConstructor
+public class TaskService {
+    private final TaskRepository taskRepository;
+    private final NoteRepository noteRepository;
+
+    /**
+     * Удаляет задачу по ее Id, попутно удаляя все относящиеся к ней заметки.
+     * @param taskId - Id задачи
+     */
+    @Transactional
+    public void deleteTaskById(Long taskId) {
+        List<Note> notes = noteRepository.findByTask_Id(taskId);
+        noteRepository.deleteAll(notes);
+        taskRepository.deleteById(taskId);
+    }
 }
-

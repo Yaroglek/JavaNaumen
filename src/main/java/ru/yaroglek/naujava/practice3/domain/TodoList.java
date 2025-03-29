@@ -8,40 +8,33 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Сущность задачи.
+ * Сущность списка задач.
  */
 @Entity
-@Table(name = "tasks")
-@Builder
+@Table(name = "todo_lists")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Task {
+public class TodoList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String title;
 
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "owner_id", nullable = false)
+    private User owner;
+
     @CreationTimestamp
     @Column(nullable = false, updatable = false, name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "due_date")
-    private LocalDateTime dueDate;
-
-    @ManyToOne
-    @JoinColumn(name = "todo_list_id")
-    private TodoList todoList;
-
-    @ManyToOne
-    @JoinColumn(name = "status_id")
-    private Status status;
-
-    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Note> notes;
+    @OneToMany(mappedBy = "todoList", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> tasks;
 }

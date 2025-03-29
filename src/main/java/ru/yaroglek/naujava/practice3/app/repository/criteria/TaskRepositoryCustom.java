@@ -1,16 +1,11 @@
-package ru.yaroglek.naujava.practice3.app.repository;
+package ru.yaroglek.naujava.practice3.app.repository.criteria;
 
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 import ru.yaroglek.naujava.practice3.domain.Task;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Repository
-public interface TaskRepository extends CrudRepository<Task, Long> {
+public interface TaskRepositoryCustom {
     /**
      * Находит все задачи в заданном списке, у которых дата окончания наступает раньше заданной
      * @param todoListId - Id списка.
@@ -26,6 +21,5 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
      * @param userId - идентификатор пользователя.
      * @return список задач.
      */
-    @Query("SELECT t FROM Task t WHERE t.todoList.owner.id = :userId")
-    List<Task> findAllTasksByUserId(@Param("userId") Long userId);
+    List<Task> findAllTasksByUserId(Long userId);
 }
