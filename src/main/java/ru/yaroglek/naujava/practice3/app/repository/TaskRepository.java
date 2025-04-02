@@ -3,6 +3,7 @@ package ru.yaroglek.naujava.practice3.app.repository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 import ru.yaroglek.naujava.practice3.domain.Task;
 
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
+@RepositoryRestResource
 public interface TaskRepository extends CrudRepository<Task, Long> {
     /**
      * Находит все задачи в заданном списке, у которых дата окончания наступает раньше заданной
