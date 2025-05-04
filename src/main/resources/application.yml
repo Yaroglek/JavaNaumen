@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: NauJava
+    version: 0.0.1
+  profiles:
+    active: dev
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:h2:mem:dev_db
+    username: dev
+    password: dev
+    driverClassName: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:postgresql://localhost:5432/todo
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create

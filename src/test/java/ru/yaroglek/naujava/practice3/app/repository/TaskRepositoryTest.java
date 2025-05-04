@@ -38,7 +38,7 @@ public class TaskRepositoryTest {
         user = User.builder()
                 .username("testUser")
                 .email("test@example.com")
-                .passwordHash("hashed_password")
+                .password("hashed_password")
                 .build();
         userRepository.save(user);
 

@@ -11,7 +11,6 @@ import ru.yaroglek.naujava.practice3.app.repository.TaskRepository;
 import ru.yaroglek.naujava.practice3.domain.Note;
 import ru.yaroglek.naujava.practice3.domain.Task;
 
-
 @DataJpaTest
 @ComponentScan("ru.yaroglek.naujava.practice3.app")
 class TaskServiceTest {
