@@ -24,6 +24,7 @@ public class SpringSecurityConfig
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/registration", "/login", "/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").hasRole("ADMIN")
+                        .requestMatchers("/reports, /reports/**").hasRole("ADMIN")
                         .requestMatchers("/custom/users/view/**").hasRole("ADMIN")
                         .requestMatchers("/h2-console/**").hasRole("ADMIN")
                         .requestMatchers("/custom/tasks/**").hasAnyRole("USER", "ADMIN")

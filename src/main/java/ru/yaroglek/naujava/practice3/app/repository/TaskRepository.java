@@ -30,4 +30,6 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
      */
     @Query("SELECT t FROM Task t WHERE t.todoList.owner.id = :userId")
     List<Task> findAllTasksByUserId(@Param("userId") Long userId);
+
+    List<Task> findAll();
 }
