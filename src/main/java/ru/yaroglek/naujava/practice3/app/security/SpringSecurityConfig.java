@@ -27,7 +27,7 @@ public class SpringSecurityConfig
                         .requestMatchers("/reports, /reports/**").hasRole("ADMIN")
                         .requestMatchers("/custom/users/view/**").hasRole("ADMIN")
                         .requestMatchers("/h2-console/**").hasRole("ADMIN")
-                        .requestMatchers("/custom/tasks/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/custom/tasks/**").permitAll() //Для упрощения тестирования
                         .anyRequest().authenticated()
                 )
                 .formLogin(Customizer.withDefaults())

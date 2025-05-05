@@ -46,4 +46,12 @@ public class UserService {
     public Optional<User> findUserByUsername(String username) {
         return userRepository.findUserByUsername(username);
     }
+
+    /**
+     * Удаляет пользователя по id
+     * @param id - id для удаления
+     */
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
+    }
 }
